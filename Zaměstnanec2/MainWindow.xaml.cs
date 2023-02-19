@@ -311,7 +311,6 @@ namespace Zaměstnanec2
                     sw.WriteLine("Plat: \"" + Employee.AllEmp[i].Salary + "\"");
                 }
             }
-            CreateXml("XML.xml");
             ableToSave.Content = $"Soubor byl aktualizován!";
         }
 
@@ -351,25 +350,6 @@ namespace Zaměstnanec2
             em.Job = "";
             em.BDay = "";
             em.HGrad = "";
-        }
-        public static void CreateXml(string soubor)
-        {
-            XDocument doc = new XDocument(new XElement("Zaměstnanci"));
-            doc.Root.SetAttributeValue("datum", DateTime.Now);
-            for (int i = 0; i < Employee.AllEmp.Count; i++)
-            {
-                XElement emXeml = new XElement("Zaměstnanec");
-                emXeml.SetAttributeValue("Id", i);
-                emXeml.SetAttributeValue("First_name", Employee.AllEmp[i].FName);
-                emXeml.SetAttributeValue("Second_Name", Employee.AllEmp[i].SName);
-                emXeml.SetAttributeValue("Bday", Employee.AllEmp[i].BDay);
-                emXeml.SetAttributeValue("Hgrad", Employee.AllEmp[i].HGrad);
-                emXeml.SetAttributeValue("Job", Employee.AllEmp[i].Job);
-                emXeml.SetAttributeValue("Salary", Employee.AllEmp[i].Salary);
-                doc.Root.Add(emXeml);
-
-            }
-            doc.Save(soubor);
         }
         class Person : INotifyPropertyChanged
         {
