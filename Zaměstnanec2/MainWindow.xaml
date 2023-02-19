@@ -5,40 +5,110 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zaměstnanec2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1423">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Grid/>
-        <Label Content="Jméno:*" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <Label Content="Příjmení:*" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"/>
-        <Label Content="Rok narození:*" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"/>
-        <Label Content="Dosažené vzdělání:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3"/>
-        <Label Content="Pracovní pozice:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="4"/>
-        <Label Content="Hrubý plat v KČ:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="5"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Jmeno}" VerticalAlignment="Stretch"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Prijmeni}" VerticalAlignment="Stretch" Grid.Row="1"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Rok}" VerticalAlignment="Stretch" Grid.Row="2"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Pozice}" VerticalAlignment="Stretch" Grid.Row="4"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Plat}" VerticalAlignment="Stretch" Grid.Row="5"/>
-        <Button Grid.Column="1" Content="Save" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch"/>
-        <ComboBox Grid.Column="1" Text="{Binding Vzdelani}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3"/>
-        <Label Grid.Column="2" Content="Prázdné pole!" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#D0342C"/>
-        <Label Grid.Column="2" Grid.Row="1" Content="Prázdné pole!" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#D0342C"/>
-        <Label Grid.Column="2" Grid.Row="2" Content="Prázdné pole!" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#D0342C"/>
+        <Label Grid.ColumnSpan="2" Content="Jméno" Grid.Column="0" Grid.Row="0" Margin="4" VerticalContentAlignment="Center"/>
+        <Label Grid.ColumnSpan="2" Content="Příjmení*" Grid.Column="0" Grid.Row="1" Margin="4" VerticalContentAlignment="Center" ToolTip="Povinné pole"/>
+        <Label Grid.ColumnSpan="2" Content="Datum narození" Grid.Column="0" Grid.Row="2" Margin="4" VerticalContentAlignment="Center"/>
+        <Label Grid.ColumnSpan="2" Content="Nejvyšší dokončené vzdělání" Grid.Column="0" Grid.Row="3" Margin="4" VerticalContentAlignment="Center"/>
+        <Label Grid.ColumnSpan="2" Content="Pracovní pozice*" Grid.Column="0" Grid.Row="4" Margin="4" VerticalContentAlignment="Center" ToolTip="Povinné pole"/>
+        <Label Grid.ColumnSpan="2" Content="Hrubý plat v korunách*" Grid.Column="0" Grid.Row="5" Margin="4" VerticalContentAlignment="Center" ToolTip="Povinné pole"/>
+        <TextBox Name="tbFName" Text="{Binding FName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="0" Margin="4"/>
+        <TextBox Name="tbSName" Text="{Binding SName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="1" Margin="4"/>
+        <DatePicker Name="tpBDay" SelectedDate="01.01.2000"  Text="{Binding BDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2" Margin="4"/>
+        <ComboBox Name="cbHGrad" SelectedIndex="0" Text="{Binding HGrad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="3" Margin="4">
+            <ComboBoxItem>Základní škola</ComboBoxItem>
+            <ComboBoxItem>Střední škola</ComboBoxItem>
+            <ComboBoxItem>Vysoká škola</ComboBoxItem>
+        </ComboBox>
+        <TextBox Name="tbJob" Text="{Binding Job, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="4" Margin="4"/>
+        <TextBox Name="tbSalary" Text="{Binding Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="5" Margin="4"/>
+        <Button Style="{StaticResource Button}" Name="btnSave" Content="Uložit" Margin="80,6,80,6" Grid.Column="2" Grid.Row="7" Click="btnSave_Click" ToolTip="Uloží osobu do souboru a do listview."/>
+        <Button Style="{StaticResource Button}" Name="btnClear" Content="Clear" Margin="20,6,20,6" Grid.Column="0" Grid.Row="7" Click="btnClear_Click"/>
+        <Button Style="{StaticResource Button}" Name="btnNovak" Content="Novak" Margin="20,6,20,6" Grid.Column="1" Grid.Row="7" Click="btnNovak_Click"/>
+        <Button Style="{StaticResource Button}" Name="btnSaveAll" Content="Aktualizace souboru po editaci ListView" Margin="70,6,70,6" Grid.Column="3" Grid.Row="7" Click="btnSaveAll_Click" ToolTip="Uloží celé ListView do souboru."/>
+        <Label Name="ableToSave" FontSize="14" Grid.Column="0" Grid.Row="6" Margin="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="4"/>
+        <Label Name="saveString" FontSize="14" Content="{Binding Status}" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="4"/>
+        <Label Name="labErrorFirstName" Grid.Row="0" Grid.Column="3" Content=" " Margin="4" />
+        <Label Name="labErrorSecondName" Grid.Row="1" Grid.Column="3" Content=" " Margin="4"/>
+        <Label Name="labErrorBday" Grid.Row="2" Grid.Column="3" Content=" " Margin="4"/>
+        <Label Name="labErrorHgrad" Grid.Row="3" Grid.Column="3" Content=" " Margin="4"/>
+        <Label Name="labErrorJob" Grid.Row="4" Grid.Column="3" Content=" " Margin="4"/>
+        <Label Name="labErrorSalary" Grid.Row="5" Grid.Column="3" Content=" " Margin="4"/>
+        <ListView 
+            Name="lview"
+            Grid.Row="8"
+            Grid.Column="0" 
+            Grid.ColumnSpan="4"
+            ItemsSource="{Binding AllEmp}"
+            HorizontalContentAlignment="Stretch"
+            d:ItemsSource="{d:SampleData ItemCount=6}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding FName}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding SName}"/>
+                        <TextBlock Grid.Column="2" Text="{Binding BDay}"/>
+                        <TextBlock Grid.Column="3" Text="{Binding HGrad}"/>
+                        <TextBlock Grid.Column="4" Text="{Binding Job}"/>
+                        <TextBlock Grid.Column="5" Text="{Binding Salary}"/>
+                        <Button
+                            x:Name="btnEdit"
+                            Grid.Column="6"
+                            Style="{StaticResource Button}"
+                            MinWidth="100"
+                            Content="Edit" Click="btnEdit_Click" 
+                            
+                        />
+                        <Button
+                            x:Name="btnDelete"
+                            Grid.Column="7"
+                            Style="{StaticResource Button}"
+                            MinWidth="100"
+                            Content="Delete"
+                            Click="btnDelete_Click"
+                        />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+
+        </ListView>
+
+
+
+
     </Grid>
+
 </Window>

@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:Zaměstnanec2"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <Brush x:Key="Barva">#ffffff</Brush>
+            <Brush x:Key="Pozadi">#2c698d</Brush>
+            <Style x:Key="Button" TargetType="Button">
+                <Setter Property="Background" Value="#2c698d" />
+                <Setter Property="Foreground" Value="#ffff" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
